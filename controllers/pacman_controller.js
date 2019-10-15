@@ -6,7 +6,7 @@ var ghost = require("../models/pacman");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-  ghost.getAllGhost(function(data) {
+  ghost.all(function(data) {
     var hbsObject = {
       ghosts: data
     };
@@ -16,46 +16,25 @@ router.get("/", function(req, res) {
   });
 });
 
-router.post("/api/ghosts", function(req, res) {
-  ghost.create([
-    "name", "eaten"
-  ], [
-    req.body.name, req.body.eaten
-  ], function(result) {
+router.post("/ghosts/create", function(req, res) {
+  ghost.create(
+  req.body.name,
+   function(result) {
     // Send back the ID of the new quote
-    res.json({ id: result.insertId });
+    res.redirect("/");
   });
 });
 
-router.put("/api/ghosts/:id", function(req, res) {
-  var condition = "id = " + req.params.id;
-
-  console.log("condition", condition);
-
-  ghost.update({
-    eaten: req.body.eaten
-  }, condition, function(result) {
-    if (result.changedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    } else {
-      res.status(200).end();
+router.put("/ghosts/:id", function(req, res) {
+  ghost.update(
+    req.params.id,
+    function(result) {
+      res.sendStatus(200)
     }
-  });
+  );
 });
 
-router.delete("/api/ghosts/:id", function(req, res) {
-  var condition = "id = " + req.params.id;
 
-  ghost.delete(condition, function(result) {
-    if (result.affectedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    } else {
-      res.status(200).end();
-    }
-  });
-});
 
 // Export routes for server.js to use.
 module.exports = router;

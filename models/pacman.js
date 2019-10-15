@@ -8,21 +8,14 @@ var ghost = {
     });
   },
   // The variables cols and vals are arrays.
-  create: function(cols, vals, cb) {
-    orm.create("ghosts", cols, vals, function(res) {
-      cb(res);
-    });
+  create: function(name, cb) {
+    orm.create("ghosts", ["name", "eaten"], [name, false], cb)
   },
-  update: function(objColVals, condition, cb) {
-    orm.update("ghosts", objColVals, condition, function(res) {
-      cb(res);
-    });
+  update: function(id, cb) {
+    var condition = "id=" + id;
+    orm.update("ghosts", {eaten: true}, condition, cb 
+    );
   },
-  delete: function(condition, cb) {
-    orm.delete("ghosts", condition, function(res) {
-      cb(res);
-    });
-  }
 };
 
 

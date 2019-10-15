@@ -2,7 +2,8 @@ console.log("main.js hooked up");
 
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
-  $(".change-sleep").on("click", function(event) {
+  $("#eatform").on("click", function(event) {
+    event.preventDefault();
     var id = $(this).data("id");
     var newEaten = $(this).data("neweaten");
 
@@ -58,4 +59,4 @@ $(function() {
         location.reload();
       }
     );
-})
+})});
