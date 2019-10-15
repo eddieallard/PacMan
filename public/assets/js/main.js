@@ -1,27 +1,23 @@
 console.log("main.js hooked up");
 
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(function() {
-  $("#eatform").on("click", function(event) {
+  $(".chomp").on("click", function(event) {
     event.preventDefault();
-    var id = $(this).data("id");
-    var newEaten = $(this).data("neweaten");
-
-    var newlyEaten = {
-      eaten: newEaten
-    };
+    console.log("button click");
+    var id = $(this).attr("data-id");
 
     // Send the PUT request.
-    $.ajax("/api/ghosts/" + id, {
-      type: "PUT",
-      data: newlyEaten
+    $.ajax( {
+      method: "PUT",
+      url: "/ghosts/" + id
     }).then(
       function() {
-        console.log("changed eaten to", newEaten);
         // Reload the page to get the updated list
         location.reload();
       }
-    );
+    ).catch(error){
+      console.log(error);
+    }
   });
 
   $(".create-form").on("submit", function(event) {
@@ -45,18 +41,3 @@ $(function() {
       }
     );
   });
-    
-    $(".delete-ghost").on("click", function (event){
-    var id = $(this).data("id");
-  
-    //Send the DELETE request.
-    $.ajax("/api/ghosts/" + id, {
-      type: "DELETE"
-    }).then(
-      function() {
-        console.log("deleted ghost", id);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-})});

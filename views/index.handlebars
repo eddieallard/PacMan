@@ -10,15 +10,12 @@
             <div class="panel-panel default">
                 <ul class="list-group">
                     {{#each ghosts}}
-                        {{#unless this.devoured}}
+                        {{#unless eaten}}
                             <li class="list-group-item">
                                 <div class="input-group">
-                                    <p class="lead"> {{this.ghost_name}} </p>
+                                    <p class="lead"> {{name}} </p>
                                     <span class="input-group-btn">
-								<form id="eatform">
-									<input type="hidden" name="devoured" value="true">
-									<button class="btn btn-default btn-lg" type="submit"> EAT IT! </button>
-								</form>
+									<button class="btn chomp btn-default btn-lg" data-id="{{id}}"> CHOMP IT! </button>
 							</span>
                                 </div>
                             </li>
@@ -35,9 +32,9 @@
                 <div class="panel panel-default">
                     <ul class="list-group">
                         {{#each ghosts}}
-                            {{#if this.devoured}}
+                            {{#if eaten}}
                                 <li class="list-group-item">
-                                    <p class="lead">{{this.ghost_name}} </p>
+                                    <p class="lead">{{_name}} </p>
                                 </li>
                             {{/if}}
                         {{/each}}
