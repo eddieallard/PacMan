@@ -4,7 +4,6 @@
   "description": "Pacman",
   "main": "server.js",
   "scripts": {
-    "start": "node app.js",
     "test": "test"
   },
   "repository": {
