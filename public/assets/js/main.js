@@ -15,9 +15,9 @@ console.log("main.js hooked up");
         // Reload the page to get the updated list
         location.reload();
       }
-    ).catch(error){
+    ).catch(error) {
       console.log(error);
-    }
+    };
   });
 
   $(".create-form").on("submit", function(event) {

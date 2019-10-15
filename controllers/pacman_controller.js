@@ -3,6 +3,7 @@ var router = express.Router();
 
 // Import the model (pacman.js) to use its database functions.
 var ghost = require("../models/pacman");
+var router = express.Router();
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
